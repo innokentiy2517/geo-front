@@ -1,12 +1,21 @@
-import React, {Ref} from 'react';
-import {MapContainer, TileLayer, useMapEvents} from 'react-leaflet';
-import './App.css';
-import {LatLngTuple} from "leaflet";
-import Map from "./Map";
+import React from 'react';
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import './sass/App.sass';
+import LoginPage from "./Pages/LoginPage";
+import RegistrationPage from "./Pages/RegistrationPage";
+import CustomMap from "./Components/CustomMap"
+import MapPage from "./Pages/MapPage";
 
 function App() {
     return (
-        <Map/>
+        <BrowserRouter>
+            <Routes>
+                <Route path={'login'} element={<LoginPage/>}/>
+                <Route path={'registration'} element={<RegistrationPage/>}/>
+                <Route path={'/'} element={<MapPage/>}/>
+            </Routes>
+        </BrowserRouter>
+
     );
 }
 
