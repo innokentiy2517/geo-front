@@ -1,13 +1,14 @@
-import { Action } from "redux";
-import { IMarker } from "../../Components/CustomMap";
+import { Action } from 'redux';
+import { MarkerType } from '../../pages/mapPage/components/CustomMap';
 
 export interface MarkerState {
-  data: IMarker | undefined;
+  data: MarkerType | undefined;
 }
 
+// eslint-disable-next-line no-shadow
 export enum MarkerActionEnum {
-  ADD_MARKER = "marker/ADD_MARKER",
-  DELETE_MARKER = "marker/DELETE_MARKER",
+  ADD_MARKER = 'marker/ADD_MARKER',
+  DELETE_MARKER = 'marker/DELETE_MARKER',
 }
 
 export interface AddMarkerInterface
