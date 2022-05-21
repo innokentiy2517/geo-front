@@ -5,7 +5,6 @@ export interface MarkerState {
   data: MarkerType | undefined;
 }
 
-// eslint-disable-next-line no-shadow
 export enum MarkerActionEnum {
   ADD_MARKER = 'marker/ADD_MARKER',
   DELETE_MARKER = 'marker/DELETE_MARKER',

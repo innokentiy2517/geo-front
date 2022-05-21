@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Map, { MapLayerMouseEvent, Marker, useMap } from 'react-map-gl';
+import Map, { MapLayerMouseEvent, Marker } from 'react-map-gl';
 import { useActions } from '../../../Store/hooks/useActions';
 
 const token = 'pk.eyJ1IjoiaW5ub2tlbnRpeTI1MTciLCJhIjoiY2wwdHRicHd2MHAxZjNibm1odTdwNXk1cCJ9.aibsBxys2tKJkN25qkCAKg';
@@ -10,14 +10,14 @@ export interface MarkerType {
 }
 
 function CustomMap() {
-  const { addMarker, deleteMarker } = useActions();
+  const { fetchAddress, deleteMarker } = useActions();
   const [markers, setMarkers] = useState<MarkerType[]>([]);
-  const { map } = useMap();
+  // const { map } = useMap();
   const onClick = (e: MapLayerMouseEvent) => {
     const longitude = e.lngLat.lng;
     const latitude = e.lngLat.lat;
     console.log(e.lngLat);
-    addMarker({ longitude, latitude });
+    fetchAddress({ longitude, latitude });
     setMarkers((markers) => [...markers, { longitude, latitude }]);
   };
   return (
@@ -35,13 +35,13 @@ function CustomMap() {
       id="map"
     >
       {markers && (
-        markers.map((marker, idx) => (
+        markers.map((marker) => (
           <Marker
             onClick={(e) => {
               e.target.remove();
               deleteMarker();
             }}
-            key={idx}
+            key={marker.longitude}
             longitude={marker.longitude}
             latitude={marker.latitude}
             clickTolerance={20}

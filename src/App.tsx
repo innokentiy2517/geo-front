@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './sass/App.sass';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
-import CustomMap from './pages/mapPage/components/CustomMap';
 import MapPage from './pages/mapPage/MapPage';
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
         <Route path="/" element={<MapPage />} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 
