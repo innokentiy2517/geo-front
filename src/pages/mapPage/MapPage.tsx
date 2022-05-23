@@ -1,6 +1,6 @@
 import React from 'react';
 import CustomMap from './components/CustomMap';
-import NewTaskMenu from './components/NewTaskMenu';
+import NewTaskMenu from './components/NewTaskMenu/NewTaskMenu';
 import s from './map.module.sass';
 
 function MapPage() {
