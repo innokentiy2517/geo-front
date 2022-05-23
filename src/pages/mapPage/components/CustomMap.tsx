@@ -10,15 +10,22 @@ export interface MarkerType {
 }
 
 function CustomMap() {
-  const { fetchAddress, deleteMarker } = useActions();
+  const { fetchAddress, deleteMarker, deleteAddress } = useActions();
   const [markers, setMarkers] = useState<MarkerType[]>([]);
-  // const { map } = useMap();
   const onClick = (e: MapLayerMouseEvent) => {
     const longitude = e.lngLat.lng;
     const latitude = e.lngLat.lat;
-    console.log(e.lngLat);
-    fetchAddress({ longitude, latitude });
-    setMarkers((markers) => [...markers, { longitude, latitude }]);
+    fetchAddress({
+      longitude,
+      latitude,
+    });
+    setMarkers((markers) => [
+      ...markers,
+      {
+        longitude,
+        latitude,
+      },
+    ]);
   };
   return (
     <Map
@@ -27,27 +34,30 @@ function CustomMap() {
         latitude: 52.27600080292447,
         zoom: 13,
       }}
-      style={{ width: '100%', height: '100vh' }}
+      style={{
+        width: '100%',
+        height: '100vh',
+      }}
       mapboxAccessToken={token}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onDblClick={onClick}
       doubleClickZoom={false}
       id="map"
     >
-      {markers && (
-        markers.map((marker) => (
+      {markers
+        && markers.map((marker) => (
           <Marker
             onClick={(e) => {
               e.target.remove();
               deleteMarker();
+              deleteAddress();
             }}
             key={marker.longitude}
             longitude={marker.longitude}
             latitude={marker.latitude}
             clickTolerance={20}
           />
-        ))
-      )}
+        ))}
     </Map>
   );
 }

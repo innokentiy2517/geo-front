@@ -1,19 +1,25 @@
 import { combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
-import { MarkerActionCreators } from './Marker/ActionCreators';
-import { MarkerReducer } from './Marker/reducer';
-import { AddressReducer } from './Address/reducer';
-import { AddressActionCreators } from './Address/ActionCreators';
+import markerReducer, { markerSlice } from './Marker/markerSlice';
+import addressReducer, { addressSlice, fetchAddress } from './Address/addressSlice';
+/* export const ActionCreators = {
+  markerSlice.actions,
+  // ...AddressActionCreators,
+}; */
+
+const addressActions = addressSlice.actions;
+const markerActions = markerSlice.actions;
 
 export const ActionCreators = {
-  ...MarkerActionCreators,
-  ...AddressActionCreators,
+  ...addressActions,
+  ...markerActions,
+  fetchAddress,
 };
 
 const rootReducer = combineReducers({
-  marker: MarkerReducer,
-  address: AddressReducer,
+  marker: markerReducer,
+  address: addressReducer,
 });
 
 export const store = configureStore({

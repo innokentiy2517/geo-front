@@ -20,11 +20,11 @@ function TaskList() {
       </div>
       <Tabs>
         <TabList className="tabs-switch">
-          {tabs.map(((value, index) => (
+          {tabs.map(((value) => (
             <Tab
               className="tabs-switch__item"
               _selected={{ background: '#fbfbfb' }}
-              key={index}
+              key={value.text}
             >
               {value.text}
             </Tab>
