@@ -4,16 +4,13 @@ import { useTypedSelector } from '../../../Store/hooks/useTypedSelector';
 
 function NewTaskMenu() {
   const { data } = useTypedSelector((state) => state.address);
-
   return (
     <div className="taskbar">
       <img src={logo} alt="Logo" />
       <h1>Создание метки</h1>
       {typeof data !== 'undefined' ? (
         <h2>
-          {data && data}
-          ,
-          {data && data}
+          {data && data.features[0].place_name}
         </h2>
       ) : (
         <h2>Поставьте маркер на карту</h2>
