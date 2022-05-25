@@ -20,6 +20,7 @@ module.exports = {
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
     'no-unused-vars': 'error',
+    'linebreak-style': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': ['error', 'never', { ignorePackages: true }],
     '@typescript-eslint/naming-convention': [
