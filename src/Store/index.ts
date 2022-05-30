@@ -3,23 +3,23 @@ import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import markerReducer, { markerSlice } from './Marker/markerSlice';
 import addressReducer, { addressSlice, fetchAddress } from './Address/addressSlice';
-/* export const ActionCreators = {
-  markerSlice.actions,
-  // ...AddressActionCreators,
-}; */
+import newTaskReducer, { newTaskSlice } from './NewTask/newTaskSlice';
 
 const addressActions = addressSlice.actions;
 const markerActions = markerSlice.actions;
+const newTaskActions = newTaskSlice.actions;
 
 export const ActionCreators = {
   ...addressActions,
   ...markerActions,
+  ...newTaskActions,
   fetchAddress,
 };
 
 const rootReducer = combineReducers({
   marker: markerReducer,
   address: addressReducer,
+  newTask: newTaskReducer,
 });
 
 export const store = configureStore({
