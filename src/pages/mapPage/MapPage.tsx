@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CustomMap from './components/CustomMap';
 import NewTaskMenu from './components/NewTaskMenu/NewTaskMenu';
 import s from './map.module.sass';
 import TaskList from './components/TaskList';
+import useTypedSelector from '../../Store/hooks/useTypedSelector';
+import useActions from '../../Store/hooks/useActions';
+import { BarEnum } from '../../Store/App/appSlice';
+
+const Bar = {
+  [BarEnum.NEW_TASK]: <NewTaskMenu />,
+  [BarEnum.TASK_LIST]: <TaskList />,
+};
 
 function MapPage() {
-  const [isNewTaskBar, setNewTaskBar] = useState<boolean>(false);
+  const { bar } = useTypedSelector((state) => state.app);
+  const { setBar } = useActions();
   const handleCreateTask = () => {
-    setNewTaskBar(!isNewTaskBar);
+    setBar(BarEnum.NEW_TASK);
   };
   return (
     <div className={s.mapPageWrapper}>
-      {isNewTaskBar ? <NewTaskMenu /> : <TaskList />}
+      {Bar[bar]}
       <CustomMap />
       <button
         onClick={handleCreateTask}
