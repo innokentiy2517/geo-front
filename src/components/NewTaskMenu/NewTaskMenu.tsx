@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import 'react-day-picker/dist/style.css';
 import ReactSwitch from 'react-switch';
-import logo from '../../../../assets/logo.svg';
-import { useTypedSelector } from '../../../../Store/hooks/useTypedSelector';
+import logo from '../../assets/logo.svg';
+import { useTypedSelector } from '../../Store/hooks/useTypedSelector';
 import s from './NewTaskMenu.module.sass';
 import { getAddress } from './utils';
-import Clock from './components/Clock';
-import WeekDayPicker from './components/WeekDayPicker';
-import Calendar from './components/Calendar';
-import useActions from '../../../../Store/hooks/useActions';
-import { BarEnum } from '../../../../Store/App/appSlice';
+import Clock from '../Clock';
+import WeekDayPicker from '../WeekDayPicker';
+import Calendar from '../Calendar';
+import useActions from '../../Store/hooks/useActions';
+import { BarEnum } from '../../Store/App/appSlice';
 
 function NewTaskMenu() {
   const { data } = useTypedSelector((state) => state.address);
@@ -54,6 +54,8 @@ function NewTaskMenu() {
         temporary: state.temporary,
         id: new Date().toString(),
         time: state.time,
+        completed: false,
+        address,
       });
       setBar(BarEnum.TASK_LIST);
       deleteMarker();

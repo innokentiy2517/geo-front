@@ -5,8 +5,8 @@ import {
   ToggleButtonGroup,
   ToggleButtonProps,
 } from '@mui/material';
-import useTypedSelector from '../../../../../Store/hooks/useTypedSelector';
-import useActions from '../../../../../Store/hooks/useActions';
+import useTypedSelector from '../Store/hooks/useTypedSelector';
+import useActions from '../Store/hooks/useActions';
 
 const DAYS = [
   {

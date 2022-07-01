@@ -1,8 +1,9 @@
-import React from 'react';
-import CustomMap from './components/CustomMap';
-import NewTaskMenu from './components/NewTaskMenu/NewTaskMenu';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import CustomMap from '../../components/CustomMap';
+import NewTaskMenu from '../../components/NewTaskMenu/NewTaskMenu';
 import s from './map.module.sass';
-import TaskList from './components/TaskList';
+import TaskList from '../../components/TaskList/TaskList';
 import useTypedSelector from '../../Store/hooks/useTypedSelector';
 import useActions from '../../Store/hooks/useActions';
 import { BarEnum } from '../../Store/App/appSlice';
@@ -13,6 +14,13 @@ const Bar = {
 };
 
 function MapPage() {
+  const { isLoggedIn } = useTypedSelector((state) => state.user);
+  const history = useNavigate();
+  useEffect(() => {
+    if (!isLoggedIn) {
+      history('../login');
+    }
+  }, []);
   const { bar } = useTypedSelector((state) => state.app);
   const { setBar } = useActions();
   const handleCreateTask = () => {

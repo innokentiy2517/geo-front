@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import TimeField from 'react-simple-timefield';
-import useActions from '../../../../../Store/hooks/useActions';
+import useActions from '../Store/hooks/useActions';
 
 function Clock() {
   const { setTime } = useActions();

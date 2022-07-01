@@ -1,8 +1,8 @@
 import React from 'react';
 import { DayPicker } from 'react-day-picker';
 import ru from 'date-fns/locale/ru';
-import useActions from '../../../../../Store/hooks/useActions';
-import useTypedSelector from '../../../../../Store/hooks/useTypedSelector';
+import useActions from '../Store/hooks/useActions';
+import useTypedSelector from '../Store/hooks/useTypedSelector';
 
 function Calendar() {
   const { setDate } = useActions();
