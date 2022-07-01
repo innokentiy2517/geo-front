@@ -1,4 +1,4 @@
-import { GeocodeType } from '../../../../types/GeocodeTypes';
+import { GeocodeType } from '../../types/GeocodeTypes';
 
 export const getAddress = (data: GeocodeType | undefined) : string => {
   const address: string = typeof data !== 'undefined'
