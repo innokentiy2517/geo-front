@@ -1,18 +1,18 @@
 import { Task } from './tasksSlice';
 
 const mocktasks: Task[] = [
-  // {
-  //   id: '213',
-  //   date: new Date(2022, 5, 1),
-  //   title: 'Залупа ебучая',
-  //   description: 'Сюда я ходил 5 лет почти каждый день',
-  //   time: '12:00',
-  //   temporary: true,
-  //   latitude: 52.262579997411414,
-  //   longitude: 104.26150195437111,
-  //   completed: false,
-  //   address: 'Иркутск, ул. Лермонтова, д.83',
-  // },
+  {
+    id: '213',
+    date: new Date(2022, 5, 6),
+    title: 'Залупа ебучая',
+    description: 'Сюда я ходил 5 лет почти каждый день',
+    time: '12:00',
+    temporary: true,
+    latitude: 52.262579997411414,
+    longitude: 104.26150195437111,
+    completed: false,
+    address: 'Иркутск, ул. Лермонтова, д.83',
+  },
   {
     id: '3242',
     date: new Date(2022, 5, 6),

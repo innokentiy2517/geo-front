@@ -32,7 +32,7 @@ export const {
   deleteAddress,
 } = addressSlice.actions;
 
-export const fetchAddress = createAsyncThunk('address/fetchAddress', async (latlng:MarkerType, { dispatch }) => {
+export const fetchAddress = createAsyncThunk('address/fetchAddress', async (latlng: MarkerType, { dispatch }) => {
   dispatch(addMarker(latlng));
   try {
     const response = await axios.get<GeocodeType>(

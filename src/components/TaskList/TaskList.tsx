@@ -6,15 +6,21 @@ import logo from '../../assets/logo.svg';
 import searchIcon from '../../assets/search-icon.svg';
 import useTypedSelector from '../../Store/hooks/useTypedSelector';
 import ListItem from './ListItem';
+import DateItem from './DateItem';
 
 const tabs = [{ text: 'Текущие' }, { text: 'Постоянные' }, { text: 'Выполненные' }];
 
 function TaskList() {
   const tasks = useTypedSelector((state) => state.tasks);
-  const dates = new Set();
+  const dates = new Set<string>();
   tasks.data.map((task) => (
     task.date && dates.add(task.date.toString())
   ));
+  /* if (dates.size !== 0) {
+    dates.forEach((value) => console.log(new Date(value)));
+  } */
+  const daysComponents: JSX.Element[] = [];
+  dates.forEach((value) => (daysComponents.push(<DateItem key={value} date={value} />)));
   return (
     <div className="taskbar">
       <img src={logo} alt="Logo" />
@@ -39,18 +45,52 @@ function TaskList() {
         </TabList>
         <TabPanels>
           <TabPanel>
-            Список текущих заданий
+            {daysComponents.length !== 0 && daysComponents.map((day) => (day))}
+            {/* Список текущих заданий
             {tasks.data.map((task) => (
-              <ListItem
-                title={task.title}
-                key={task.title}
-                description={task.description}
-                address={task.address}
-                time={task.time}
-              />
+              task.temporary ? (
+                <ListItem
+                  title={task.title}
+                  key={task.title}
+                  description={task.description}
+                  address={task.address}
+                  time={task.time}
+                />
+              ) : null
+            ))} */}
+            {/* {
+              dates.forEach((value) => (
+                <>
+                  {}
+                  {tasks.data.map((task) => (
+                    (task.temporary && task.date === new Date(value)) ? (
+                      <ListItem
+                        title={task.title}
+                        key={task.title}
+                        description={task.description}
+                        address={task.address}
+                        time={task.time}
+                      />
+                    ) : null
+                  ))}
+                </>
+              ))
+            } */}
+          </TabPanel>
+          <TabPanel>
+            Список постоянных заданий
+            {tasks.data.map((task) => (
+              task.temporary ? null : (
+                <ListItem
+                  title={task.title}
+                  key={task.title}
+                  description={task.description}
+                  address={task.address}
+                  time={task.time}
+                />
+              )
             ))}
           </TabPanel>
-          <TabPanel>Список постоянных заданий</TabPanel>
           <TabPanel>Список выполненных заданий</TabPanel>
         </TabPanels>
       </Tabs>
