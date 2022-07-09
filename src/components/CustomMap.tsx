@@ -6,6 +6,7 @@ import Map, {
   NavigationControl,
   Popup,
 } from 'react-map-gl';
+import { MarkerDragEvent } from 'react-map-gl/dist/es5';
 import { useActions } from '../Store/hooks/useActions';
 import '../pages/mapPage/map.module.sass';
 import useTypedSelector from '../Store/hooks/useTypedSelector';
@@ -23,8 +24,10 @@ function CustomMap() {
   const { data } = useTypedSelector((state) => state.address);
   const tasks = useTypedSelector((state) => state.tasks.data);
   const {
+    // eslint-disable-next-line no-unused-vars
     fetchAddress, deleteMarker, deleteAddress, fetchTasks,
   } = useActions();
+  // eslint-disable-next-line no-unused-vars
   const [popup, setPopup] = useState<GeocodeType>();
   useEffect(() => {
     fetchTasks();
@@ -48,12 +51,31 @@ function CustomMap() {
       }
     }
   };
+  const handleMarkerDrag = (e: MarkerDragEvent) => {
+    switch (bar) {
+      case BarEnum.NEW_TASK: {
+        const longitude = e.lngLat.lng;
+        const latitude = e.lngLat.lat;
+        fetchAddress({
+          longitude,
+          latitude,
+        });
+        break;
+      }
+      case BarEnum.TASK_LIST: {
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
   const handleMarkerClick = (e: MapboxEvent<MouseEvent>) => {
     e.originalEvent.stopPropagation();
-    setPopup(data);
-    e.target.remove();
+    // setPopup(data);
+    /* e.target.remove();
     deleteMarker();
-    deleteAddress();
+    deleteAddress(); */
   };
   return (
     <Map
@@ -92,6 +114,8 @@ function CustomMap() {
           longitude={data.query[0]}
           latitude={data.query[1]}
           clickTolerance={20}
+          draggable
+          onDragEnd={handleMarkerDrag}
         />
       )}
       {tasks
