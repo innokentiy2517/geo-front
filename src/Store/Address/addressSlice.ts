@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { GeocodeType } from '../../types/GeocodeTypes';
 import { MarkerType } from '../../components/CustomMap';
@@ -27,21 +28,23 @@ export const addressSlice = createSlice({
   },
 });
 
-export const {
-  addAddress,
-  deleteAddress,
-} = addressSlice.actions;
+export const { addAddress, deleteAddress } = addressSlice.actions;
 
-export const fetchAddress = createAsyncThunk('address/fetchAddress', async (latlng: MarkerType, { dispatch }) => {
-  dispatch(addMarker(latlng));
-  try {
-    const response = await axios.get<GeocodeType>(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${latlng.longitude},${latlng.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`,
-    );
-    dispatch(addAddress(response.data));
-  } catch (e) {
-    console.log(e);
+export const fetchAddress = createAsyncThunk(
+  'address/fetchAddress',
+  async (latlng: MarkerType, { dispatch }) => {
+    dispatch(addMarker(latlng));
+    try {
+      const response = await axios.get<GeocodeType>(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${latlng.longitude},${
+          latlng.latitude
+        }.json?access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`
+      );
+      dispatch(addAddress(response.data));
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 export default addressSlice.reducer;

@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface NewTaskState {
   title: string;
@@ -18,7 +19,7 @@ const initialState: NewTaskState = {
   time: '00:00',
 };
 
-export const newTaskSlice = createSlice({
+export const TaskNewSlice = createSlice({
   name: 'newTask',
   initialState,
   reducers: {
@@ -57,14 +58,7 @@ export const newTaskSlice = createSlice({
   },
 });
 
-export const {
-  setTitle,
-  setDescription,
-  setTemporary,
-  setDate,
-  setWeekDay,
-  setTime,
-  resetState,
-} = newTaskSlice.actions;
+export const { setTitle, setDescription, setTemporary, setDate, setWeekDay, setTime, resetState } =
+  TaskNewSlice.actions;
 
-export default newTaskSlice.reducer;
+export default TaskNewSlice.reducer;

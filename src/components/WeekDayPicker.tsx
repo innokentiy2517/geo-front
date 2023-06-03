@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  styled,
-  ToggleButton,
-  ToggleButtonGroup,
-  ToggleButtonProps,
-} from '@mui/material';
+import { styled, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import type { ToggleButtonProps } from '@mui/material';
 import useTypedSelector from '../Store/hooks/useTypedSelector';
 import useActions from '../Store/hooks/useActions';
 
@@ -51,7 +47,7 @@ function WeekDayPicker() {
       background: '#F3C247',
     },
   }));
-  const { weekDay } = useTypedSelector((state) => state.newTask);
+  const { weekDay } = useTypedSelector((state) => state.taskNew);
   const { setWeekDay } = useActions();
   // const [days, setDays] = useState([]);
   return (

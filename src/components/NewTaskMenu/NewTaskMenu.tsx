@@ -10,13 +10,12 @@ import WeekDayPicker from '../WeekDayPicker';
 import Calendar from '../Calendar';
 import useActions from '../../Store/hooks/useActions';
 import { BarEnum } from '../../Store/App/appSlice';
+import { toast } from 'react-toastify';
 
 function NewTaskMenu() {
   const { data } = useTypedSelector((state) => state.address);
-  const state = useTypedSelector((state) => state.newTask);
-  const { temporary, title, description } = useTypedSelector(
-    (state) => state.newTask,
-  );
+  const state = useTypedSelector((state) => state.taskNew);
+  const { temporary, title, description } = useTypedSelector((state) => state.taskNew);
   const address: string = getAddress(data);
   const {
     setTitle,
@@ -60,6 +59,11 @@ function NewTaskMenu() {
       setBar(BarEnum.TASK_LIST);
       deleteMarker();
       deleteAddress();
+    } else {
+      toast.error('Please select a location', {
+        position: toast.POSITION.TOP_RIGHT,
+        pauseOnHover: false,
+      });
     }
   };
   return (
@@ -67,11 +71,7 @@ function NewTaskMenu() {
       <img src={logo} alt="Logo" />
       <h1>Создание метки</h1>
       <h2>{address}</h2>
-      <input
-        value={title}
-        placeholder="Название"
-        onChange={handleTitleChange}
-      />
+      <input value={title} placeholder="Название" onChange={handleTitleChange} />
       <input
         value={description}
         placeholder="Описание"
@@ -80,9 +80,7 @@ function NewTaskMenu() {
       />
       <div className={s.newTaskMenu__switchWrapper}>
         <p>
-          Временная
-          {' '}
-          <span>(удалится после выполнения)</span>
+          Временная <span>(удалится после выполнения)</span>
         </p>
         <ReactSwitch
           checked={temporary}

@@ -13,7 +13,7 @@ interface LoginForm {
 }
 
 function LoginPage() {
-  console.log(process.env.API_ROUTE);
+  console.log(import.meta.env.API_ROUTE);
   const { signIn } = useActions();
   const { isLoggedIn } = useTypedSelector((state) => state.user);
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function LoginPage() {
     if (isLoggedIn) {
       navigate('../');
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
   const validationSchema = yup.object().shape({
     email: yup.string().email().required('Введите e-mail'),
     password: yup.string().required('Введите пароль'),
@@ -57,16 +57,12 @@ function LoginPage() {
       </h1>
       <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
         <h2>Вход</h2>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <input {...register('email')} placeholder="Почта" />
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <input {...register('password')} placeholder="Пароль" type="password" />
         <button type="submit">Войти</button>
       </form>
       <a href="/registration">
-        Нет аккаунта?
-        {' '}
-        <span>Зарегистрироваться</span>
+        Нет аккаунта? <span>Зарегистрироваться</span>
       </a>
     </div>
   );

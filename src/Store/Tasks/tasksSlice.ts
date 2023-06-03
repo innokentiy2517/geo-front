@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import mocktasks from './mocktasks';
 
 export interface Task {
@@ -34,7 +35,7 @@ export const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    setTasks: (state:TasksState, action: PayloadAction<Task[]>) => ({
+    setTasks: (state: TasksState, action: PayloadAction<Task[]>) => ({
       ...state,
       data: action.payload,
     }),

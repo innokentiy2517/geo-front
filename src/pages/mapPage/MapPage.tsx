@@ -7,6 +7,9 @@ import TaskList from '../../components/TaskList/TaskList';
 import useTypedSelector from '../../Store/hooks/useTypedSelector';
 import useActions from '../../Store/hooks/useActions';
 import { BarEnum } from '../../Store/App/appSlice';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { is } from 'date-fns/locale';
 
 const Bar = {
   [BarEnum.NEW_TASK]: <NewTaskMenu />,
@@ -20,7 +23,7 @@ function MapPage() {
     if (!isLoggedIn) {
       history('../login');
     }
-  }, []);
+  }, [history, isLoggedIn]);
   const { bar } = useTypedSelector((state) => state.app);
   const { setBar } = useActions();
   const handleCreateTask = () => {
@@ -30,11 +33,8 @@ function MapPage() {
     <div className={s.mapPageWrapper}>
       {Bar[bar]}
       <CustomMap />
-      <button
-        onClick={handleCreateTask}
-        className={s.mapPageWrapper__newTaskButton}
-        type="button"
-      >
+      <ToastContainer />
+      <button onClick={handleCreateTask} className={s.mapPageWrapper__newTaskButton} type="button">
         Добавить задание
       </button>
     </div>
